@@ -1,5 +1,7 @@
 # A single GET endpoint to retrieve your 5 most favortite pokemon!
 
+This uses Flask micro-framework for the API endpoint itself, marshamallow for serialization and pytest for unit tests.
+
 ## Dependencies
 
 ### Python
