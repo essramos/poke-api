@@ -22,7 +22,7 @@ Example:
 
 ```
 curl -X GET \
-  'http://127.0.0.1:4999/search?pokemons=pikachu,gible,mew,mewtwo,squirtle' \
+  'http://127.0.0.1:5000/search?pokemons=pikachu,gible,mew,mewtwo,squirtle' \
   -H 'Postman-Token: 453cff9e-9196-4531-a9ea-da5cd7f306e6' \
   -H 'cache-control: no-cache'
 ```
