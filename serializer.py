@@ -19,6 +19,7 @@ class PokemonSchema(Schema):
         moves = data.get("moves")
         if len(moves) == 0:
             return []
+
         random_moves_indices = sample(
             range(len(moves)), k=1 if len(moves) < 2 else 2
         )  # returns list

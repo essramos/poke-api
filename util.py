@@ -7,8 +7,9 @@ POKEMON_SPECIE_API_URL = "https://pokeapi.co/api/v2/pokemon-species"
 
 
 def retrieve_pokemon_data(pokemon_name: str) -> Optional[dict]:
-    pokemon_url = f"{POKEMON_API_URL}/{pokemon_name}"
-    pokemon_response, status_code = call_pokemon_api(pokemon_url)
+    pokemon_response, status_code = call_pokemon_api(
+        f"{POKEMON_API_URL}/{pokemon_name}"
+    )
     if pokemon_response is None:
         app.logger.info(
             f"Pokemon {pokemon_name} was not found. Status code: {status_code}"
