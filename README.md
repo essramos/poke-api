@@ -1,27 +1,35 @@
-A single GET endpoint to retrieve your 5 most favortite pokemon!
+# A single GET endpoint to retrieve your 5 most favortite pokemon!
 
-# Dependencies
+## Dependencies
 
-## Python
+### Python
 
 1. install python 3.8 and set up and activate a virtual environment
 2. `pip install -r requirements.txt`
 
-# Run server
+## Run server
 
 `python main.py`
 
-# Run tests
+## Run tests
 
 `pytest`
 
-# How to search for pokemons
+## How to search for pokemons
 
 Pass in 5 pokemons to `pokemons` URL parameter, comma delimeted  
-Example:  
-GET /search?pokemons=pikachu,gible,mew,mewtwo,squirtle
+Example:
+
+```
+curl -X GET \
+  'http://127.0.0.1:4999/search?pokemons=pikachu,gible,mew,mewtwo,squirtle' \
+  -H 'Postman-Token: 453cff9e-9196-4531-a9ea-da5cd7f306e6' \
+  -H 'cache-control: no-cache'
+```
 
 - Pokemons not found will not exists in the response.
+- If you pass > 5 pokemon names, it will return 400 error.
+- Duplicated pokemon names will be deduped
 
 ```
 {
@@ -87,7 +95,7 @@ GET /search?pokemons=pikachu,gible,mew,mewtwo,squirtle
 }
 ```
 
-# Next Steps (Productionize the app)
+## Next Steps (Productionize the app)
 
 - Productionize Flask set-up (like using Application factories)
 - Use production WSGI server like Gunicorn

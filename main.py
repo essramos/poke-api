@@ -50,7 +50,7 @@ def query_pokemons():
         return jsonify(error="No pokemons found"), 404
 
     schema = PokemonsSchema()
-    return schema.dumps({"pokemons": found_pokemons})
+    return jsonify(schema.dump({"pokemons": found_pokemons}))
 
 
 if __name__ == "__main__":
