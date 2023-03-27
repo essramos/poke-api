@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
 from serializer import PokemonsSchema
-from util import retrieve_pokemon_data
+from util import retrieve_pokemon_data, validate_pokemon_url_parameter
 
 app = Flask(__name__)
 
@@ -23,20 +23,10 @@ def handle_exception(e):
 
 @app.route("/search", methods=["GET"])
 def query_pokemons():
-    pokemons = request.args.get("pokemons")
     try:
-        pokemons = set(
-            [x for x in pokemons.split(",") if x != ""]
-        )  # unique pokemons only
-    except Exception as e:
-        app.logger.exception(e)
-        return jsonify(error="Invalid query parameter"), 400
-
-    if not pokemons:
-        return jsonify(error="Invalid query parameter"), 400
-
-    if len(pokemons) > 5:
-        return jsonify(error="Please pass 5 pokemons only"), 400
+        pokemons = validate_pokemon_url_parameter(request.args.get("pokemons"))
+    except ValueError as e:
+        return jsonify(error=str(e)), 400
 
     app.logger.info(f"Searching data for the following pokemons: {pokemons}")
 
@@ -54,4 +44,4 @@ def query_pokemons():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=4999)
+    app.run(debug=True)

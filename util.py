@@ -39,3 +39,21 @@ def call_pokemon_api(url: str) -> Tuple[Optional[dict], int]:
         return response.json(), response.status_code
     else:
         return None, response.status_code
+
+
+def validate_pokemon_url_parameter(pokemons_parameter: str) -> set:
+    try:
+        pokemons = set(
+            [x for x in pokemons_parameter.split(",") if x != ""]
+        )  # unique pokemons only
+    except Exception as e:
+        app.logger.exception(e)
+        raise ValueError("Invalid query parameter")
+
+    if not pokemons:
+        raise ValueError("Invalid query parameter")
+
+    if len(pokemons) > 5:
+        raise ValueError("Please pass 5 pokemons only")
+
+    return pokemons
